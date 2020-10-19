@@ -1,0 +1,6 @@
+package: boilerplate
+import:
+- package: github.com/gofiber/fiber
+  version: v2.1.0
+- package: github.com/lib/pq
+  version: v1.8.0
