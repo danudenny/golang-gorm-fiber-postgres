@@ -1,39 +1,19 @@
 package config
 
 import (
-	"database/sql"
 	"fmt"
-	"os"
 
-	_ "github.com/lib/pq"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
-func getPostgresDB() (*sql.DB, error) {
-	host := os.Getenv("POSTGRES_HOST")
-	user := os.Getenv("POSTGRES_USER")
-	pass := os.Getenv("POSTGRES_PASS")
-	dbname := os.Getenv("POSTGRES_DBNAME")
-
-	desc := fmt.Sprint("host=%s user=%s pass=%s dbname=%s sslmode=disable", host, user, pass, dbname)
-
-	db, err := createConnection(desc)
-
-	if err != nil {
-		return nil, err
+func initDatabase() {
+	var err error
+	dsn := "host=localhost user=postgres password=postgres dbname=boilerplate_golang port=5432 sslmode=disable TimeZone=Asia/Jakarta"
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	if db == nil || err != nil {
+		panic("Failed to connect to Database")
 	}
 
-	return db, nil
-}
-
-func createConnection(desc string) (*sql.DB, error) {
-	db, err := sql.Open("postgres", desc)
-
-	if err != nil {
-		return nil, err
-	}
-
-	db.SetMaxIdleConns(10)
-	db.SetMaxOpenConns(10)
-
-	return db, nil
+	fmt.Println("Database connection successfully created")
 }
