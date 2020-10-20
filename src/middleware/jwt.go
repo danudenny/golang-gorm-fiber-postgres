@@ -1,6 +1,8 @@
 package middleware
 
 import (
+	"os"
+
 	"github.com/gofiber/fiber"
 	jwtware "github.com/gofiber/jwt"
 )
@@ -15,6 +17,6 @@ func AuthRequired() func(ctx *fiber.Ctx) {
 			})
 		},
 		SigningMethod: "HS256",
-		SigningKey:    []byte(jwtSecret),
+		SigningKey:    []byte(os.Getenv("JWT_SECRET")),
 	})
 }

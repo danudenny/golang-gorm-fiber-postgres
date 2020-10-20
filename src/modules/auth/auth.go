@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"os"
 	"time"
 
 	login "github.com/danudenny/golang-gorm-fiber-postgres/src/models"
@@ -33,7 +34,7 @@ func Login(ctx *fiber.Ctx) {
 	claims["sub"] = "1"
 	claims["exp"] = time.Now().Add(time.Hour * 24)
 
-	s, err := token.SignedString([]byte(jwtSecret))
+	s, err := token.SignedString([]byte(os.Getenv("JWT_SECRET")))
 
 	if err != nil {
 		ctx.SendStatus(fiber.StatusInternalServerError)
