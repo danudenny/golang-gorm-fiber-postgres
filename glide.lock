@@ -1,8 +1,0 @@
-hash: 8211269c55a373566e12a21cc4530cc24ea10159a3fa19b29ca9fea5e568692d
-updated: 2020-10-19T14:41:00.441374013+07:00
-imports:
-- name: github.com/gofiber/fiber
-  version: dc3694162626eac2dc103c406c1e5387e1f6434b
-- name: github.com/lib/pq
-  version: e7751f584844fbf92a5a18b13a0af1c855e34460
-testImports: []
